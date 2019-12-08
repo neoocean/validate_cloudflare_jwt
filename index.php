@@ -34,7 +34,7 @@
 
         $current_link = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $jwt = getCloudflareAccessJWT();
-        if((isCloudflareAccessUrl($current_link) === true) && (empty($jwt) === false)) {
+        if((isCloudflareAccessUrl($current_link) === true) && ($jwt !== false)) {
             return(true);
         } 
         return(false);
@@ -173,7 +173,7 @@
         debug(__FUNCTION__);
         $jwt = $_COOKIE['CF_Authorization'];
         if(empty($jwt) === true) { 
-            die('CF_Authorization Not Found.');
+            return(false);
         }
         return($jwt);
     }
